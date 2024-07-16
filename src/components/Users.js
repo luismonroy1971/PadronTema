@@ -133,6 +133,7 @@ const Users = () => {
     setUserToDelete(null);
   };
 
+  const handleUsersMassive = () => {}
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4"> Usuarios de la aplicación </h1>{' '}
@@ -142,6 +143,15 @@ const Users = () => {
       >
         Añadir Usuario{' '}
       </button>{' '}
+      <button
+        onClick={handleUsersMassive}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+      >
+        Añadir Usuarios Masivo
+      </button>{' '}
+      <a href="" download>
+        Descargar Plantilla de Usuarios Masivo
+      </a>{' '}
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />{' '}
       <table {...getTableProps()} className="min-w-full bg-white">
         <thead>

@@ -18,6 +18,7 @@ import Periodic from './components/evaluation/Periodic';
 import OnDemand from './components/evaluation/OnDemand';
 import LoginPage from './components/LoginPage';
 import OptionsByRoles from './components/OptionsByRoles'; // Importar el nuevo componente
+import ReportGenerator from './components/Reports';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/tables/projects" element={<Projects />} />{' '}
                 <Route path="/evaluation/periodic" element={<Periodic />} />{' '}
                 <Route path="/evaluation/on-demand" element={<OnDemand />} />{' '}
+                <Route path="/reportes" element={<ReportGenerator />} />{' '}
                 <Route path="*" element={<Navigate to="/users" />} />{' '}
               </Routes>{' '}
             </div>{' '}
