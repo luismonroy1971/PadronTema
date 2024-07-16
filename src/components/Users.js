@@ -5,24 +5,11 @@ import UserForm from './UserForm'; // Importar el nuevo componente UserForm
 
 const Users = () => {
   const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: 'Juan Pérez',
-      email: 'juan.perez@example.com',
-      role: 'Admin',
-    },
-    {
-      id: 2,
-      name: 'Ana García',
-      email: 'ana.garcia@example.com',
-      role: 'User',
-    },
-    {
-      id: 3,
-      name: 'Luis Torres',
-      email: 'luis.torres@example.com',
-      role: 'User',
-    },
+
+    { id: 1, name: 'Juan Pérez', email: 'juan.perez@example.com', role: 'Admin' },
+    { id: 2, name: 'Ana García', email: 'ana.garcia@example.com', role: 'User' },
+    { id: 3, name: 'Luis Torres', email: 'luis.torres@example.com', role: 'User' },
+
   ]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -64,6 +51,7 @@ const Users = () => {
             >
               Eliminar{' '}
             </button>{' '}
+
           </div>
         ),
       },
@@ -83,9 +71,7 @@ const Users = () => {
     {
       columns,
       data: users,
-      defaultColumn: {
-        Filter: DefaultColumnFilter,
-      },
+      defaultColumn: { Filter: DefaultColumnFilter },
     },
     useFilters,
     useGlobalFilter
@@ -112,13 +98,7 @@ const Users = () => {
     if (currentUser) {
       setUsers(users.map((u) => (u.id === user.id ? user : u)));
     } else {
-      setUsers([
-        ...users,
-        {
-          ...user,
-          id: users.length + 1,
-        },
-      ]);
+      setUsers([...users, { ...user, id: users.length + 1 }]);
     }
     setIsFormOpen(false);
   };
@@ -137,6 +117,7 @@ const Users = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4"> Usuarios de la aplicación </h1>{' '}
+
       <button
         onClick={handleAddUser}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
@@ -181,6 +162,7 @@ const Users = () => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
+
                 {' '}
                 {row.cells.map((cell) => (
                   <td

@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+/* En tu archivo CSS */
+.active-tab {
+  background-color: #007bff; /* Cambia este color según tu preferencia */
+  color: white;
+  border-radius: 4px;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+/* CSS para cambiar el color del texto de la opción activa */
+.sidebar .active {
+  color: #00ee00;
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+

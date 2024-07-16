@@ -17,8 +17,10 @@ import Projects from './components/tables/Projects';
 import Periodic from './components/evaluation/Periodic';
 import OnDemand from './components/evaluation/OnDemand';
 import LoginPage from './components/LoginPage';
+
 import OptionsByRoles from './components/OptionsByRoles'; // Importar el nuevo componente
 import ReportGenerator from './components/Reports';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,12 +32,12 @@ function App() {
   return (
     <Router>
       <div className="flex h-screen">
-        {' '}
         {isAuthenticated ? (
           <>
             <Sidebar />
             <div className="flex-grow p-4">
               <Routes>
+
                 <Route path="/users" element={<Users />} />{' '}
                 <Route path="/roles" element={<Roles />} />{' '}
                 <Route path="/options" element={<Options />} />{' '}
@@ -55,10 +57,10 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
-            <Route path="*" element={<Navigate to="/" />} />{' '}
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        )}{' '}
-      </div>{' '}
+        )}
+      </div>
     </Router>
   );
 }
