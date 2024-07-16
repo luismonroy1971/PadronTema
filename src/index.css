@@ -2,10 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-/* En tu archivo CSS */
-.active-tab {
-    background-color: #007bff; /* Cambia este color según tu preferencia */
-    color: white;
-    border-radius: 4px;
-  }
+
   
