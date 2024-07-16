@@ -1,6 +1,4 @@
-import React, {
-  useState
-} from 'react';
+import React, { useState } from 'react';
 import DatosPersonales from './tabs/DatosPersonales';
 import Direccion from './tabs/Direccion';
 import SistemaPensionario from './tabs/SistemaPensionario';
@@ -9,7 +7,8 @@ import DatosEducativos from './tabs/DatosEducativos';
 import TrabajoRemoto from './tabs/TrabajoRemoto';
 import Otros from './tabs/Otros';
 
-const workers = [{
+const workers = [
+  {
     id: 1,
     name: 'Gregor Alfredo Abarca Chavez',
     dni: '73671897',
@@ -77,40 +76,19 @@ const BasicInfo = () => {
   const renderTab = () => {
     switch (currentTab) {
       case 'personal':
-        return <DatosPersonales workers = {
-          currentWorkers
-        }
-        />;
+        return <DatosPersonales workers={currentWorkers} />;
       case 'address':
-        return <Direccion workers = {
-          currentWorkers
-        }
-        />;
+        return <Direccion workers={currentWorkers} />;
       case 'pension':
-        return <SistemaPensionario workers = {
-          currentWorkers
-        }
-        />;
+        return <SistemaPensionario workers={currentWorkers} />;
       case 'work':
-        return <DatosLaborales workers = {
-          currentWorkers
-        }
-        />;
+        return <DatosLaborales workers={currentWorkers} />;
       case 'education':
-        return <DatosEducativos workers = {
-          currentWorkers
-        }
-        />;
+        return <DatosEducativos workers={currentWorkers} />;
       case 'remote':
-        return <TrabajoRemoto workers = {
-          currentWorkers
-        }
-        />;
+        return <TrabajoRemoto workers={currentWorkers} />;
       case 'others':
-        return <Otros workers = {
-          currentWorkers
-        }
-        />;
+        return <Otros workers={currentWorkers} />;
       default:
         return null;
     }
@@ -120,58 +98,66 @@ const BasicInfo = () => {
     setCurrentPage(pageNumber);
   };
 
-  return ( <
-    div >
-    <
-    h1 className = "text-2xl font-bold mb-4" > Información Básica(Formulario 1.0) < /h1> <
-    div className = "mb-4" >
-    <
-    button onClick = {
-      () => setCurrentTab('personal')
-    }
-    className={`mr-2 ${currentTab === 'personal' ? 'active-tab' : ''}`} > Datos Personales < /button> <
-    button onClick = {
-      () => setCurrentTab('address')
-    }
-    className={`mr-2 ${currentTab === 'address' ? 'active-tab' : ''}`} > Dirección < /button> <
-    button onClick = {
-      () => setCurrentTab('pension')
-    }
-    className={`mr-2 ${currentTab === 'pension' ? 'active-tab' : ''}`} > Sistema Pensionario < /button> <
-    button onClick = {
-      () => setCurrentTab('work')
-    }
-    className={`mr-2 ${currentTab === 'work' ? 'active-tab' : ''}`} > Datos Laborales < /button> <
-    button onClick = {
-      () => setCurrentTab('education')
-    }
-    className={`mr-2 ${currentTab === 'education' ? 'active-tab' : ''}`} > Datos Educativos < /button> <
-    button onClick = {
-      () => setCurrentTab('remote')
-    }
-    className={`mr-2 ${currentTab === 'remote' ? 'active-tab' : ''}`} > Trabajo Remoto < /button> <
-    button onClick = {
-      () => setCurrentTab('others')
-    }
-    className={`mr-2 ${currentTab === 'others' ? 'active-tab' : ''}`} > Otros < /button> < /
-    div > {
-      renderTab()
-    } <
-    div className = "mt-4" > {
-      [...Array(Math.ceil(workers.length / workersPerPage)).keys()].map(number => ( <
-        button key = {
-          number
-        }
-        onClick = {
-          () => handlePageChange(number + 1)
-        }
-        className = "mr-2" > {
-          number + 1
-        } < /button>
-      ))
-    } <
-    /div> < /
-    div >
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Información Básica(Formulario 1.0)</h1>
+      <div className="mb-4">
+        <button
+          onClick={() => setCurrentTab('personal')}
+          className={`mr-2 ${currentTab === 'personal' ? 'active-tab' : ''}`}
+        >
+          Datos Personales
+        </button>
+        <button
+          onClick={() => setCurrentTab('address')}
+          className={`mr-2 ${currentTab === 'address' ? 'active-tab' : ''}`}
+        >
+          Dirección
+        </button>
+        <button
+          onClick={() => setCurrentTab('pension')}
+          className={`mr-2 ${currentTab === 'pension' ? 'active-tab' : ''}`}
+        >
+          Sistema Pensionario
+        </button>
+        <button
+          onClick={() => setCurrentTab('work')}
+          className={`mr-2 ${currentTab === 'work' ? 'active-tab' : ''}`}
+        >
+          Datos Laborales
+        </button>
+        <button
+          onClick={() => setCurrentTab('education')}
+          className={`mr-2 ${currentTab === 'education' ? 'active-tab' : ''}`}
+        >
+          Datos Educativos
+        </button>
+        <button
+          onClick={() => setCurrentTab('remote')}
+          className={`mr-2 ${currentTab === 'remote' ? 'active-tab' : ''}`}
+        >
+          Trabajo Remoto
+        </button>
+        <button
+          onClick={() => setCurrentTab('others')}
+          className={`mr-2 ${currentTab === 'others' ? 'active-tab' : ''}`}
+        >
+          Otros
+        </button>
+      </div>
+      {renderTab()}
+      <div className="mt-4">
+        {[...Array(Math.ceil(workers.length / workersPerPage)).keys()].map(number => (
+          <button
+            key={number}
+            onClick={() => handlePageChange(number + 1)}
+            className="mr-2"
+          >
+            {number + 1}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 };
 
