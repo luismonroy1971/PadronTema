@@ -129,31 +129,31 @@ const BasicInfo = () => {
     button onClick = {
       () => setCurrentTab('personal')
     }
-    className = "mr-2" > Datos Personales < /button> <
+    className={`mr-2 ${currentTab === 'personal' ? 'active-tab' : ''}`} > Datos Personales < /button> <
     button onClick = {
       () => setCurrentTab('address')
     }
-    className = "mr-2" > Dirección < /button> <
+    className={`mr-2 ${currentTab === 'address' ? 'active-tab' : ''}`} > Dirección < /button> <
     button onClick = {
       () => setCurrentTab('pension')
     }
-    className = "mr-2" > Sistema Pensionario < /button> <
+    className={`mr-2 ${currentTab === 'pension' ? 'active-tab' : ''}`} > Sistema Pensionario < /button> <
     button onClick = {
       () => setCurrentTab('work')
     }
-    className = "mr-2" > Datos Laborales < /button> <
+    className={`mr-2 ${currentTab === 'work' ? 'active-tab' : ''}`} > Datos Laborales < /button> <
     button onClick = {
       () => setCurrentTab('education')
     }
-    className = "mr-2" > Datos Educativos < /button> <
+    className={`mr-2 ${currentTab === 'education' ? 'active-tab' : ''}`} > Datos Educativos < /button> <
     button onClick = {
       () => setCurrentTab('remote')
     }
-    className = "mr-2" > Trabajo Remoto < /button> <
+    className={`mr-2 ${currentTab === 'remote' ? 'active-tab' : ''}`} > Trabajo Remoto < /button> <
     button onClick = {
       () => setCurrentTab('others')
     }
-    className = "mr-2" > Otros < /button> < /
+    className={`mr-2 ${currentTab === 'others' ? 'active-tab' : ''}`} > Otros < /button> < /
     div > {
       renderTab()
     } <
