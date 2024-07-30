@@ -10,8 +10,9 @@ const OnDemandEvaluation = () => {
   const [evaluations, setEvaluations] = useState(initialEvaluations);
   const [selectedEvaluation, setSelectedEvaluation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [searchDni, setSearchDni] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
   const handleEdit = (evaluation) => {
     setSelectedEvaluation(evaluation);
@@ -39,17 +40,22 @@ const OnDemandEvaluation = () => {
     setSelectedEvaluation(null);
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
+  const handleSearchDniChange = (e) => {
+    setSearchDni(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilter(e.target.value);
+  const handleSearchNameChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleFilterStatusChange = (e) => {
+    setFilterStatus(e.target.value);
   };
 
   const filteredEvaluations = evaluations.filter(evaluation =>
-    evaluation.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? evaluation.status === filter : true)
+    evaluation.dni.includes(searchDni) &&
+    evaluation.name.toLowerCase().includes(searchName.toLowerCase()) &&
+    (filterStatus ? evaluation.status === filterStatus : true)
   );
 
   return (
@@ -67,12 +73,19 @@ const OnDemandEvaluation = () => {
         </button>
         <input
           type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
-          value={search}
-          onChange={handleSearch}
+          placeholder="Buscar por DNI..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={searchDni}
+          onChange={handleSearchDniChange}
         />
-        <select className="border border-gray-300 rounded p-2 w-1/4" value={filter} onChange={handleFilter}>
+        <input
+          type="text"
+          placeholder="Buscar por Nombre..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={searchName}
+          onChange={handleSearchNameChange}
+        />
+        <select className="border border-gray-300 rounded p-2 w-1/4" value={filterStatus} onChange={handleFilterStatusChange}>
           <option value="">Todos los Estados</option>
           <option value="Vetado">Vetado</option>
           <option value="Bueno">Bueno</option>
@@ -131,7 +144,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.dni}
+                  value={selectedEvaluation ? selectedEvaluation.dni : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, dni: e.target.value })}
                 />
               </div>
@@ -140,7 +153,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.lastname}
+                  value={selectedEvaluation ? selectedEvaluation.lastname : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, lastname: e.target.value })}
                 />
               </div>
@@ -149,7 +162,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.name}
+                  value={selectedEvaluation ? selectedEvaluation.name : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, name: e.target.value })}
                 />
               </div>
@@ -158,7 +171,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.status}
+                  value={selectedEvaluation ? selectedEvaluation.status : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, status: e.target.value })}
                 />
               </div>
@@ -167,7 +180,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.support}
+                  value={selectedEvaluation ? selectedEvaluation.support : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, support: e.target.value })}
                 />
               </div>
@@ -176,7 +189,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="date"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.date}
+                  value={selectedEvaluation ? selectedEvaluation.date : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, date: e.target.value })}
                 />
               </div>
@@ -185,7 +198,7 @@ const OnDemandEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.supervisor}
+                  value={selectedEvaluation ? selectedEvaluation.supervisor : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, supervisor: e.target.value })}
                 />
               </div>

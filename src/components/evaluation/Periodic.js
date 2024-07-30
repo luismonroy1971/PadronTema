@@ -10,8 +10,9 @@ const PeriodicEvaluation = () => {
   const [evaluations, setEvaluations] = useState(initialEvaluations);
   const [selectedEvaluation, setSelectedEvaluation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [searchDni, setSearchDni] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
   const handleEdit = (evaluation) => {
     setSelectedEvaluation(evaluation);
@@ -39,17 +40,22 @@ const PeriodicEvaluation = () => {
     setSelectedEvaluation(null);
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
+  const handleSearchDniChange = (e) => {
+    setSearchDni(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilter(e.target.value);
+  const handleSearchNameChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleFilterStatusChange = (e) => {
+    setFilterStatus(e.target.value);
   };
 
   const filteredEvaluations = evaluations.filter(evaluation =>
-    evaluation.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? evaluation.status === filter : true)
+    evaluation.dni.includes(searchDni) &&
+    evaluation.name.toLowerCase().includes(searchName.toLowerCase()) &&
+    (filterStatus ? evaluation.status === filterStatus : true)
   );
 
   return (
@@ -67,12 +73,19 @@ const PeriodicEvaluation = () => {
         </button>
         <input
           type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
-          value={search}
-          onChange={handleSearch}
+          placeholder="Buscar por DNI..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={searchDni}
+          onChange={handleSearchDniChange}
         />
-        <select className="border border-gray-300 rounded p-2 w-1/4" value={filter} onChange={handleFilter}>
+        <input
+          type="text"
+          placeholder="Buscar por Nombre..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={searchName}
+          onChange={handleSearchNameChange}
+        />
+        <select className="border border-gray-300 rounded p-2 w-1/4" value={filterStatus} onChange={handleFilterStatusChange}>
           <option value="">Todos los Estados</option>
           <option value="Vetado">Vetado</option>
           <option value="Bueno">Bueno</option>
@@ -139,7 +152,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.dni}
+                  value={selectedEvaluation ? selectedEvaluation.dni : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, dni: e.target.value })}
                 />
               </div>
@@ -148,7 +161,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.surname}
+                  value={selectedEvaluation ? selectedEvaluation.surname : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, surname: e.target.value })}
                 />
               </div>
@@ -157,7 +170,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.name}
+                  value={selectedEvaluation ? selectedEvaluation.name : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, name: e.target.value })}
                 />
               </div>
@@ -166,7 +179,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.period}
+                  value={selectedEvaluation ? selectedEvaluation.period : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, period: e.target.value })}
                 />
               </div>
@@ -175,7 +188,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="date"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.date}
+                  value={selectedEvaluation ? selectedEvaluation.date : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, date: e.target.value })}
                 />
               </div>
@@ -184,7 +197,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.supervisor}
+                  value={selectedEvaluation ? selectedEvaluation.supervisor : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, supervisor: e.target.value })}
                 />
               </div>
@@ -193,7 +206,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.status}
+                  value={selectedEvaluation ? selectedEvaluation.status : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, status: e.target.value })}
                 />
               </div>
@@ -202,7 +215,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.quality}
+                  value={selectedEvaluation ? selectedEvaluation.quality : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, quality: e.target.value })}
                 />
               </div>
@@ -211,7 +224,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.programs}
+                  value={selectedEvaluation ? selectedEvaluation.programs : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, programs: e.target.value })}
                 />
               </div>
@@ -220,7 +233,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.learning}
+                  value={selectedEvaluation ? selectedEvaluation.learning : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, learning: e.target.value })}
                 />
               </div>
@@ -229,7 +242,7 @@ const PeriodicEvaluation = () => {
                 <input
                   type="number"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedEvaluation.compliance}
+                  value={selectedEvaluation ? selectedEvaluation.compliance : ''}
                   onChange={(e) => setSelectedEvaluation({ ...selectedEvaluation, compliance: e.target.value })}
                 />
               </div>

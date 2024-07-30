@@ -9,7 +9,10 @@ const DatosLaborales = () => {
   const [workers, setWorkers] = useState(initialWorkers);
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [searchDni, setSearchDni] = useState('');
+  const [searchContractType, setSearchContractType] = useState('');
+  const [searchOrganization, setSearchOrganization] = useState('');
 
   const handleEdit = (worker) => {
     setSelectedWorker(worker);
@@ -37,12 +40,27 @@ const DatosLaborales = () => {
     setSelectedWorker(null);
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
+  const handleSearchNameChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleSearchDniChange = (e) => {
+    setSearchDni(e.target.value);
+  };
+
+  const handleSearchContractTypeChange = (e) => {
+    setSearchContractType(e.target.value);
+  };
+
+  const handleSearchOrganizationChange = (e) => {
+    setSearchOrganization(e.target.value);
   };
 
   const filteredWorkers = workers.filter(worker =>
-    worker.name.toLowerCase().includes(search.toLowerCase())
+    worker.name.toLowerCase().includes(searchName.toLowerCase()) &&
+    worker.dni.includes(searchDni) &&
+    worker.contractType.toLowerCase().includes(searchContractType.toLowerCase()) &&
+    worker.organization.toLowerCase().includes(searchOrganization.toLowerCase())
   );
 
   return (
@@ -58,13 +76,36 @@ const DatosLaborales = () => {
         >
           Añadir Trabajador
         </button>
-        <input
-          type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
-          value={search}
-          onChange={handleSearch}
-        />
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Buscar por Nombre..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchName}
+            onChange={handleSearchNameChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por DNI..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchDni}
+            onChange={handleSearchDniChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por Tipo de Contrato..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchContractType}
+            onChange={handleSearchContractTypeChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por Organización..."
+            className="border border-gray-300 rounded p-2"
+            value={searchOrganization}
+            onChange={handleSearchOrganizationChange}
+          />
+        </div>
       </div>
       <table className="min-w-full bg-white">
         <thead>

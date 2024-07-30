@@ -10,7 +10,8 @@ const MasterDataBase = () => {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [filterDniType, setFilterDniType] = useState('');
+  const [filterDni, setFilterDni] = useState('');
 
   const handleEdit = (record) => {
     setSelectedRecord(record);
@@ -38,17 +39,22 @@ const MasterDataBase = () => {
     setSelectedRecord(null);
   };
 
-  const handleSearch = (e) => {
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilter(e.target.value);
+  const handleFilterDniTypeChange = (e) => {
+    setFilterDniType(e.target.value);
+  };
+
+  const handleFilterDniChange = (e) => {
+    setFilterDni(e.target.value);
   };
 
   const filteredData = data.filter(record =>
     record.fullName.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? record.dniType === filter : true)
+    (filterDniType ? record.dniType === filterDniType : true) &&
+    (filterDni ? record.dniNumber.includes(filterDni) : true)
   );
 
   return (
@@ -66,12 +72,19 @@ const MasterDataBase = () => {
         </button>
         <input
           type="text"
-          placeholder="Buscar..."
+          placeholder="Buscar por Nombre..."
           className="border border-gray-300 rounded p-2 w-1/3"
           value={search}
-          onChange={handleSearch}
+          onChange={handleSearchChange}
         />
-        <select className="border border-gray-300 rounded p-2 w-1/4" value={filter} onChange={handleFilter}>
+        <input
+          type="text"
+          placeholder="Buscar por DNI..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={filterDni}
+          onChange={handleFilterDniChange}
+        />
+        <select className="border border-gray-300 rounded p-2 w-1/4" value={filterDniType} onChange={handleFilterDniTypeChange}>
           <option value="">Todos los Tipos de DNI</option>
           <option value="DNI">DNI</option>
           {/* Agregar más opciones si es necesario */}
@@ -81,16 +94,16 @@ const MasterDataBase = () => {
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-gray-200">ID</th>
-            <th className="py-2 px-4 border-b border-gray-200">Surname1</th>
-            <th className="py-2 px-4 border-b border-gray-200">Surname2</th>
-            <th className="py-2 px-4 border-b border-gray-200">Name1</th>
-            <th className="py-2 px-4 border-b border-gray-200">Name2</th>
-            <th className="py-2 px-4 border-b border-gray-200">Name3</th>
-            <th className="py-2 px-4 border-b border-gray-200">DNINumber</th>
-            <th className="py-2 px-4 border-b border-gray-200">DNIType</th>
-            <th className="py-2 px-4 border-b border-gray-200">BirthDate</th>
-            <th className="py-2 px-4 border-b border-gray-200">Correlative</th>
-            <th className="py-2 px-4 border-b border-gray-200">Apellidos y Nombre</th>
+            <th className="py-2 px-4 border-b border-gray-200">Apellido Paterno</th>
+            <th className="py-2 px-4 border-b border-gray-200">Apellido Materno</th>
+            <th className="py-2 px-4 border-b border-gray-200">Primer Nombre</th>
+            <th className="py-2 px-4 border-b border-gray-200">Segundo Nombre</th>
+            <th className="py-2 px-4 border-b border-gray-200">Tercer Nombre</th>
+            <th className="py-2 px-4 border-b border-gray-200">Número de DNI</th>
+            <th className="py-2 px-4 border-b border-gray-200">Tipo de DNI</th>
+            <th className="py-2 px-4 border-b border-gray-200">Fecha de Nacimiento</th>
+            <th className="py-2 px-4 border-b border-gray-200">Correlativo</th>
+            <th className="py-2 px-4 border-b border-gray-200">Apellidos y Nombres</th>
             <th className="py-2 px-4 border-b border-gray-200">Acciones</th>
           </tr>
         </thead>
@@ -133,74 +146,83 @@ const MasterDataBase = () => {
             <h2 className="text-xl font-bold mb-4">{selectedRecord.id ? 'Editar Registro' : 'Añadir Registro'}</h2>
             <form onSubmit={handleSave}>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Surname1</label>
+                <label className="block text-gray-700 mb-2">Apellido Paterno</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.surname1}
+                  value={selectedRecord ? selectedRecord.surname1 : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, surname1: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Surname2</label>
+                <label className="block text-gray-700 mb-2">Apellido Materno</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.surname2}
+                  value={selectedRecord ? selectedRecord.surname2 : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, surname2: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Name1</label>
+                <label className="block text-gray-700 mb-2">Primer Nombre</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.name1}
+                  value={selectedRecord ? selectedRecord.name1 : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, name1: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Name3</label>
+                <label className="block text-gray-700 mb-2">Segundo Nombre</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.name3}
+                  value={selectedRecord ? selectedRecord.name2 : ''}
+                  onChange={(e) => setSelectedRecord({ ...selectedRecord, name2: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Tercer Nombre</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedRecord ? selectedRecord.name3 : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, name3: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">DNINumber</label>
+                <label className="block text-gray-700 mb-2">Número de DNI</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.dniNumber}
+                  value={selectedRecord ? selectedRecord.dniNumber : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, dniNumber: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">DNIType</label>
+                <label className="block text-gray-700 mb-2">Tipo de DNI</label>
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.dniType}
+                  value={selectedRecord ? selectedRecord.dniType : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, dniType: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">BirthDate</label>
+                <label className="block text-gray-700 mb-2">Fecha de Nacimiento</label>
                 <input
                   type="date"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.birthDate}
+                  value={selectedRecord ? selectedRecord.birthDate : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, birthDate: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Correlative</label>
+                <label className="block text-gray-700 mb-2">Correlativo</label>
                 <input
                   type="number"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.correlative}
+                  value={selectedRecord ? selectedRecord.correlative : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, correlative: e.target.value })}
                 />
               </div>
@@ -209,22 +231,15 @@ const MasterDataBase = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedRecord.fullName}
+                  value={selectedRecord ? selectedRecord.fullName : ''}
                   onChange={(e) => setSelectedRecord({ ...selectedRecord, fullName: e.target.value })}
                 />
               </div>
               <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                >
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                   Guardar
                 </button>
-                <button
-                  type="button"
-                  onClick={handleCancel}
-                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                >
+                <button type="button" onClick={handleCancel} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                   Cancelar
                 </button>
               </div>

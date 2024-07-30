@@ -5,16 +5,46 @@ const DatosEducativos = () => {
         { id: 1, dni: '12345678', yearOfGraduation: '2015', profession: 'Ingeniería', specialization: 'Software', institution: 'UNI', country: 'Perú' },
         { id: 2, dni: '87654321', yearOfGraduation: '2010', profession: 'Administración', specialization: 'Finanzas', institution: 'PUCP', country: 'Perú' },
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchDni, setSearchDni] = useState('');
+    const [searchYear, setSearchYear] = useState('');
+    const [searchProfession, setSearchProfession] = useState('');
+    const [searchSpecialization, setSearchSpecialization] = useState('');
+    const [searchInstitution, setSearchInstitution] = useState('');
+    const [searchCountry, setSearchCountry] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchDniChange = (e) => {
+        setSearchDni(e.target.value);
+    };
+
+    const handleSearchYearChange = (e) => {
+        setSearchYear(e.target.value);
+    };
+
+    const handleSearchProfessionChange = (e) => {
+        setSearchProfession(e.target.value);
+    };
+
+    const handleSearchSpecializationChange = (e) => {
+        setSearchSpecialization(e.target.value);
+    };
+
+    const handleSearchInstitutionChange = (e) => {
+        setSearchInstitution(e.target.value);
+    };
+
+    const handleSearchCountryChange = (e) => {
+        setSearchCountry(e.target.value);
     };
 
     const filteredData = data.filter(item =>
-        item.profession.toLowerCase().includes(searchTerm.toLowerCase())
+        item.dni.includes(searchDni) &&
+        item.yearOfGraduation.includes(searchYear) &&
+        item.profession.toLowerCase().includes(searchProfession.toLowerCase()) &&
+        item.specialization.toLowerCase().includes(searchSpecialization.toLowerCase()) &&
+        item.institution.toLowerCase().includes(searchInstitution.toLowerCase()) &&
+        item.country.toLowerCase().includes(searchCountry.toLowerCase())
     );
 
     const handleAdd = () => {
@@ -42,13 +72,50 @@ const DatosEducativos = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="border border-gray-300 rounded p-2 mb-4"
-            />
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar por DNI..."
+                    value={searchDni}
+                    onChange={handleSearchDniChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Año de Egreso..."
+                    value={searchYear}
+                    onChange={handleSearchYearChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Profesión..."
+                    value={searchProfession}
+                    onChange={handleSearchProfessionChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Especialización..."
+                    value={searchSpecialization}
+                    onChange={handleSearchSpecializationChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Institución..."
+                    value={searchInstitution}
+                    onChange={handleSearchInstitutionChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por País..."
+                    value={searchCountry}
+                    onChange={handleSearchCountryChange}
+                    className="border border-gray-300 rounded p-2 mb-2"
+                />
+            </div>
             <button onClick={handleAdd} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
                 Añadir
             </button>

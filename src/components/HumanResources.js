@@ -10,7 +10,9 @@ const RecursosHumanos = () => {
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [filterContractType, setFilterContractType] = useState('');
+  const [filterDni, setFilterDni] = useState('');
+  const [filterSupervisor, setFilterSupervisor] = useState('');
 
   const handleEdit = (worker) => {
     setSelectedWorker(worker);
@@ -38,17 +40,27 @@ const RecursosHumanos = () => {
     setSelectedWorker(null);
   };
 
-  const handleSearch = (e) => {
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilter(e.target.value);
+  const handleFilterContractTypeChange = (e) => {
+    setFilterContractType(e.target.value);
+  };
+
+  const handleFilterDniChange = (e) => {
+    setFilterDni(e.target.value);
+  };
+
+  const handleFilterSupervisorChange = (e) => {
+    setFilterSupervisor(e.target.value);
   };
 
   const filteredWorkers = workers.filter(worker =>
     worker.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? worker.educationLevel === filter : true)
+    (filterContractType ? worker.contractType === filterContractType : true) &&
+    (filterDni ? worker.dni.includes(filterDni) : true) &&
+    (filterSupervisor ? worker.supervisor.toLowerCase().includes(filterSupervisor.toLowerCase()) : true)
   );
 
   return (
@@ -66,15 +78,29 @@ const RecursosHumanos = () => {
         </button>
         <input
           type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
+          placeholder="Buscar por Nombre..."
+          className="border border-gray-300 rounded p-2 w-1/4"
           value={search}
-          onChange={handleSearch}
+          onChange={handleSearchChange}
         />
-        <select className="border border-gray-300 rounded p-2 w-1/4" value={filter} onChange={handleFilter}>
-          <option value="">Todos los Niveles Educativos</option>
-          <option value="Universitario">Universitario</option>
-          <option value="Técnico">Técnico</option>
+        <input
+          type="text"
+          placeholder="Buscar por DNI..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={filterDni}
+          onChange={handleFilterDniChange}
+        />
+        <input
+          type="text"
+          placeholder="Buscar por Supervisor..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={filterSupervisor}
+          onChange={handleFilterSupervisorChange}
+        />
+        <select className="border border-gray-300 rounded p-2 w-1/4" value={filterContractType} onChange={handleFilterContractTypeChange}>
+          <option value="">Todos los Tipos de Contrato</option>
+          <option value="Indefinido">Indefinido</option>
+          <option value="Temporal">Temporal</option>
         </select>
       </div>
       <table className="min-w-full bg-white">
@@ -160,91 +186,91 @@ const RecursosHumanos = () => {
                 />
               </div>
               <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Fecha Inicio Contrato</label>
-<input
-  type="date"
-  className="border border-gray-300 rounded p-2 w-full"
-  value={selectedWorker ? selectedWorker.startDate : ''}
-  onChange={(e) => setSelectedWorker({ ...selectedWorker, startDate: e.target.value })}
-/>
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Tipo de Contrato</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.contractType : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, contractType: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Fecha Término Contrato</label>
-  <input
-    type="date"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.endDate : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, endDate: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Código de Proyecto</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.projectCode : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, projectCode: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Ocupación</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.occupation : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, occupation: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Cargo en la Boleta</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.position : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, position: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Nivel Educativo</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.educationLevel : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, educationLevel: e.target.value })}
-  />
-</div>
-<div className="mb-4">
-  <label className="block text-gray-700 mb-2">Supervisor Inmediato</label>
-  <input
-    type="text"
-    className="border border-gray-300 rounded p-2 w-full"
-    value={selectedWorker ? selectedWorker.supervisor : ''}
-    onChange={(e) => setSelectedWorker({ ...selectedWorker, supervisor: e.target.value })}
-  />
-</div>
-<div className="flex justify-end">
-  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-    Guardar
-  </button>
-  <button type="button" onClick={handleCancel} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-    Cancelar
-  </button>
-</div>
-</form>
-</div>
-</div>
-)}
-</div>
-);
+                <label className="block text-gray-700 mb-2">Fecha Inicio Contrato</label>
+                <input
+                  type="date"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.startDate : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, startDate: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Tipo de Contrato</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.contractType : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, contractType: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Fecha Término Contrato</label>
+                <input
+                  type="date"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.endDate : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, endDate: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Código de Proyecto</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.projectCode : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, projectCode: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Ocupación</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.occupation : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, occupation: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Cargo en la Boleta</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.position : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, position: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Nivel Educativo</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.educationLevel : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, educationLevel: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Supervisor Inmediato</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.supervisor : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, supervisor: e.target.value })}
+                />
+              </div>
+              <div className="flex justify-end">
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                  Guardar
+                </button>
+                <button type="button" onClick={handleCancel} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default RecursosHumanos;

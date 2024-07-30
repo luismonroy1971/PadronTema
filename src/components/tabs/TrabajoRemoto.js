@@ -5,16 +5,40 @@ const TrabajoRemoto = () => {
         { id: 1, dni: '12345678', remoteWork: 'Sí', computerType: 'Laptop', internetConnection: 'Buena', homeEnvironment: 'Adecuado' },
         { id: 2, dni: '87654321', remoteWork: 'No', computerType: 'PC de Escritorio', internetConnection: 'Regular', homeEnvironment: 'No Adecuado' },
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchDni, setSearchDni] = useState('');
+    const [searchRemoteWork, setSearchRemoteWork] = useState('');
+    const [searchComputerType, setSearchComputerType] = useState('');
+    const [searchInternetConnection, setSearchInternetConnection] = useState('');
+    const [searchHomeEnvironment, setSearchHomeEnvironment] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchDniChange = (e) => {
+        setSearchDni(e.target.value);
+    };
+
+    const handleSearchRemoteWorkChange = (e) => {
+        setSearchRemoteWork(e.target.value);
+    };
+
+    const handleSearchComputerTypeChange = (e) => {
+        setSearchComputerType(e.target.value);
+    };
+
+    const handleSearchInternetConnectionChange = (e) => {
+        setSearchInternetConnection(e.target.value);
+    };
+
+    const handleSearchHomeEnvironmentChange = (e) => {
+        setSearchHomeEnvironment(e.target.value);
     };
 
     const filteredData = data.filter(item =>
-        item.remoteWork.toLowerCase().includes(searchTerm.toLowerCase())
+        item.dni.includes(searchDni) &&
+        item.remoteWork.toLowerCase().includes(searchRemoteWork.toLowerCase()) &&
+        item.computerType.toLowerCase().includes(searchComputerType.toLowerCase()) &&
+        item.internetConnection.toLowerCase().includes(searchInternetConnection.toLowerCase()) &&
+        item.homeEnvironment.toLowerCase().includes(searchHomeEnvironment.toLowerCase())
     );
 
     const handleAdd = () => {
@@ -42,13 +66,43 @@ const TrabajoRemoto = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="border border-gray-300 rounded p-2 mb-4"
-            />
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar por DNI..."
+                    value={searchDni}
+                    onChange={handleSearchDniChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Trabajo Remoto..."
+                    value={searchRemoteWork}
+                    onChange={handleSearchRemoteWorkChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Tipo de Computadora..."
+                    value={searchComputerType}
+                    onChange={handleSearchComputerTypeChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Conexión a Internet..."
+                    value={searchInternetConnection}
+                    onChange={handleSearchInternetConnectionChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Ambiente en Casa..."
+                    value={searchHomeEnvironment}
+                    onChange={handleSearchHomeEnvironmentChange}
+                    className="border border-gray-300 rounded p-2 mb-2"
+                />
+            </div>
             <button onClick={handleAdd} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
                 Añadir
             </button>
