@@ -5,16 +5,22 @@ const DatosPersonales = () => {
         { id: 1, nombre: 'Gregor Alfredo Abarca Chavez', dni: '73671897' },
         { id: 2, nombre: 'Jesus Alexander Aburto Santiago', dni: '43505153' },
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchName, setSearchName] = useState('');
+    const [searchDni, setSearchDni] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchNameChange = (e) => {
+        setSearchName(e.target.value);
+    };
+
+    const handleSearchDniChange = (e) => {
+        setSearchDni(e.target.value);
     };
 
     const filteredData = data.filter(item =>
-        item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        item.nombre.toLowerCase().includes(searchName.toLowerCase()) &&
+        item.dni.includes(searchDni)
     );
 
     const handleAdd = () => {
@@ -42,13 +48,22 @@ const DatosPersonales = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="border border-gray-300 rounded p-2 mb-4"
-            />
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar por nombre..."
+                    value={searchName}
+                    onChange={handleSearchNameChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por DNI..."
+                    value={searchDni}
+                    onChange={handleSearchDniChange}
+                    className="border border-gray-300 rounded p-2 mb-2"
+                />
+            </div>
             <button
                 onClick={handleAdd}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"

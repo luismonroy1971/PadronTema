@@ -5,16 +5,28 @@ const Direccion = () => {
         { id: 1, dni: '12345678', tipoVia: 'Jirón', nombreVia: 'San Juan', numeroVia: '123', departamento: 'Lima', provincia: 'Lima', distrito: 'Lima' },
         { id: 2, dni: '87654321', tipoVia: 'Avenida', nombreVia: 'La Marina', numeroVia: '456', departamento: 'Callao', provincia: 'Callao', distrito: 'Callao' },
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchDni, setSearchDni] = useState('');
+    const [searchTipoVia, setSearchTipoVia] = useState('');
+    const [searchDepartamento, setSearchDepartamento] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchDniChange = (e) => {
+        setSearchDni(e.target.value);
+    };
+
+    const handleSearchTipoViaChange = (e) => {
+        setSearchTipoVia(e.target.value);
+    };
+
+    const handleSearchDepartamentoChange = (e) => {
+        setSearchDepartamento(e.target.value);
     };
 
     const filteredData = data.filter(item =>
-        item.nombreVia.toLowerCase().includes(searchTerm.toLowerCase())
+        item.dni.includes(searchDni) &&
+        item.tipoVia.toLowerCase().includes(searchTipoVia.toLowerCase()) &&
+        item.departamento.toLowerCase().includes(searchDepartamento.toLowerCase())
     );
 
     const handleAdd = () => {
@@ -42,13 +54,29 @@ const Direccion = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="border border-gray-300 rounded p-2 mb-4"
-            />
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar por DNI..."
+                    value={searchDni}
+                    onChange={handleSearchDniChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Tipo de Vía..."
+                    value={searchTipoVia}
+                    onChange={handleSearchTipoViaChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Departamento..."
+                    value={searchDepartamento}
+                    onChange={handleSearchDepartamentoChange}
+                    className="border border-gray-300 rounded p-2 mb-2"
+                />
+            </div>
             <button onClick={handleAdd} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
                 Añadir
             </button>

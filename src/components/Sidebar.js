@@ -38,6 +38,9 @@ const Sidebar = () => {
         <li className={`mb-2 ${isActive('/human-resources') ? 'text-activeOption' : ''}`}>
           <Link to="/human-resources" className="hover:text-gray-400">Recursos Humanos</Link>
         </li>
+        <li className={`mb-2 ${isActive('/incidents') ? 'text-activeOption' : ''}`}>
+          <Link to="/incidents" className="hover:text-gray-400">Incidencias</Link>
+        </li>
         <li className={`mb-2 ${isActive('/payroll') ? 'text-activeOption' : ''}`}>
           <Link to="/payroll" className="hover:text-gray-400">Nóminas</Link>
         </li>
@@ -67,12 +70,19 @@ const Sidebar = () => {
             </ul>
           </div>
         </li>
-                  <li className="mb-2">
-            <Link to="/reportes" className="hover:text-gray-400">
-              {' '}
-              Reportes{' '}
-            </Link>{' '}
-          </li>
+        <li className="mb-2">
+          <div className="hover:text-gray-400 cursor-pointer">
+            <Link to="#" className="hover:text-gray-400">Reportes</Link>
+            <ul className="ml-4 mt-2">
+              <li className={`mb-2 ${isActive('/reports/contracts') ? 'text-activeOption' : ''}`}>
+                <Link to="/reports/contracts" className="hover:text-gray-400">Contratos</Link>
+              </li>
+              <li className={`mb-2 ${isActive('/reports/general') ? 'text-activeOption' : ''}`}>
+                <Link to="/reports/general" className="hover:text-gray-400">Reportes Generales</Link>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div>
   );

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const initialWorkers = [
   { id: 1, dni: '73671897', name: 'Gregor Alfredo Abarca Chavez', afpOnp: 'AFP', commissionType: 'Mixta', bank: 'BCP', bankAccount: '191-1234567890', workerStatus: 'Activo' },
   { id: 2, dni: '43505153', name: 'Jesus Alexander Aburto Santiago', afpOnp: 'ONP', commissionType: 'Ninguna', bank: 'BBVA', bankAccount: '001-9876543210', workerStatus: 'Cesado' },
-  { id: 2, dni: '09283833', name: 'Luis Fernando Aburto Santiago', afpOnp: 'AFP', commissionType: 'Mixta', bank: 'BCP', bankAccount: '193-9811111210', workerStatus: 'Reingreso' }
+  { id: 3, dni: '09283833', name: 'Luis Fernando Aburto Santiago', afpOnp: 'AFP', commissionType: 'Mixta', bank: 'BCP', bankAccount: '193-9811111210', workerStatus: 'Reingreso' }
 ];
 
 const Nominas = () => {
@@ -11,7 +11,9 @@ const Nominas = () => {
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [filterWorkerStatus, setFilterWorkerStatus] = useState('');
+  const [filterDni, setFilterDni] = useState('');
+  const [filterBank, setFilterBank] = useState('');
 
   const handleEdit = (worker) => {
     setSelectedWorker(worker);
@@ -39,17 +41,27 @@ const Nominas = () => {
     setSelectedWorker(null);
   };
 
-  const handleSearch = (e) => {
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleFilter = (e) => {
-    setFilter(e.target.value);
+  const handleFilterWorkerStatusChange = (e) => {
+    setFilterWorkerStatus(e.target.value);
+  };
+
+  const handleFilterDniChange = (e) => {
+    setFilterDni(e.target.value);
+  };
+
+  const handleFilterBankChange = (e) => {
+    setFilterBank(e.target.value);
   };
 
   const filteredWorkers = workers.filter(worker =>
     worker.name.toLowerCase().includes(search.toLowerCase()) &&
-    (filter ? worker.workerStatus === filter : true)
+    (filterWorkerStatus ? worker.workerStatus === filterWorkerStatus : true) &&
+    (filterDni ? worker.dni.includes(filterDni) : true) &&
+    (filterBank ? worker.bank.toLowerCase().includes(filterBank.toLowerCase()) : true)
   );
 
   return (
@@ -67,15 +79,30 @@ const Nominas = () => {
         </button>
         <input
           type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
+          placeholder="Buscar por Nombre..."
+          className="border border-gray-300 rounded p-2 w-1/4"
           value={search}
-          onChange={handleSearch}
+          onChange={handleSearchChange}
         />
-        <select className="border border-gray-300 rounded p-2 w-1/4" value={filter} onChange={handleFilter}>
+        <input
+          type="text"
+          placeholder="Buscar por DNI..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={filterDni}
+          onChange={handleFilterDniChange}
+        />
+        <input
+          type="text"
+          placeholder="Buscar por Banco..."
+          className="border border-gray-300 rounded p-2 w-1/4"
+          value={filterBank}
+          onChange={handleFilterBankChange}
+        />
+        <select className="border border-gray-300 rounded p-2 w-1/4" value={filterWorkerStatus} onChange={handleFilterWorkerStatusChange}>
           <option value="">Todos los Estados</option>
           <option value="Activo">Activo</option>
           <option value="Cesado">Cesado</option>
+          <option value="Reingreso">Reingreso</option>
         </select>
       </div>
       <table className="min-w-full bg-white">
@@ -130,7 +157,7 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.dni}
+                  value={selectedWorker ? selectedWorker.dni : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, dni: e.target.value })}
                 />
               </div>
@@ -139,7 +166,7 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.name}
+                  value={selectedWorker ? selectedWorker.name : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, name: e.target.value })}
                 />
               </div>
@@ -148,7 +175,7 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.afpOnp}
+                  value={selectedWorker ? selectedWorker.afpOnp : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, afpOnp: e.target.value })}
                 />
               </div>
@@ -157,7 +184,7 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.commissionType}
+                  value={selectedWorker ? selectedWorker.commissionType : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, commissionType: e.target.value })}
                 />
               </div>
@@ -166,7 +193,7 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.bank}
+                  value={selectedWorker ? selectedWorker.bank : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, bank: e.target.value })}
                 />
               </div>
@@ -175,32 +202,32 @@ const Nominas = () => {
                 <input
                   type="text"
                   className="border border-gray-300 rounded p-2 w-full"
-                  value={selectedWorker.bankAccount}
+                  value={selectedWorker ? selectedWorker.bankAccount : ''}
                   onChange={(e) => setSelectedWorker({ ...selectedWorker, bankAccount: e.target.value })}
                 />
               </div>
               <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Estado de Trabajador</label>
-              <input
-                type="text"
-                className="border border-gray-300 rounded p-2 w-full"
-                value={selectedWorker.workerStatus}
-                onChange={(e) => setSelectedWorker({ ...selectedWorker, workerStatus: e.target.value })}
-              />
-            </div>
-            <div className="flex justify-end">
-              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                Guardar
-              </button>
-              <button type="button" onClick={handleCancel} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                Cancelar
-              </button>
-            </div>
-          </form>
+                <label className="block text-gray-700 mb-2">Estado de Trabajador</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded p-2 w-full"
+                  value={selectedWorker ? selectedWorker.workerStatus : ''}
+                  onChange={(e) => setSelectedWorker({ ...selectedWorker, workerStatus: e.target.value })}
+                />
+              </div>
+              <div className="flex justify-end">
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                  Guardar
+                </button>
+                <button type="button" onClick={handleCancel} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    )}
-  </div>
+      )}
+    </div>
   );
 };
 

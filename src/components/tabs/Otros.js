@@ -5,16 +5,22 @@ const Otros = () => {
         { id: 1, dni: '12345678', hobby: 'Leer', description: 'Lectura de libros de ficción y no ficción' },
         { id: 2, dni: '87654321', hobby: 'Correr', description: 'Participación en maratones y carreras locales' },
     ]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchDni, setSearchDni] = useState('');
+    const [searchHobby, setSearchHobby] = useState('');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({});
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchDniChange = (e) => {
+        setSearchDni(e.target.value);
+    };
+
+    const handleSearchHobbyChange = (e) => {
+        setSearchHobby(e.target.value);
     };
 
     const filteredData = data.filter(item =>
-        item.hobby.toLowerCase().includes(searchTerm.toLowerCase())
+        item.dni.includes(searchDni) &&
+        item.hobby.toLowerCase().includes(searchHobby.toLowerCase())
     );
 
     const handleAdd = () => {
@@ -42,13 +48,22 @@ const Otros = () => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="border border-gray-300 rounded p-2 mb-4"
-            />
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Buscar por DNI..."
+                    value={searchDni}
+                    onChange={handleSearchDniChange}
+                    className="border border-gray-300 rounded p-2 mb-2 mr-2"
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por Hobby..."
+                    value={searchHobby}
+                    onChange={handleSearchHobbyChange}
+                    className="border border-gray-300 rounded p-2 mb-2"
+                />
+            </div>
             <button onClick={handleAdd} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
                 Añadir
             </button>

@@ -18,8 +18,10 @@ import Periodic from './components/evaluation/Periodic';
 import OnDemand from './components/evaluation/OnDemand';
 import LoginPage from './components/LoginPage';
 
-import OptionsByRoles from './components/OptionsByRoles'; // Importar el nuevo componente
-import ReportGenerator from './components/Reports';
+import OptionsByRoles from './components/OptionsByRoles';
+import Incidents from './components/Incidents';
+import Contracts from './components/reports/Contracts';
+import Reports from './components/reports/Reports';
 
 
 function App() {
@@ -37,22 +39,23 @@ function App() {
             <Sidebar />
             <div className="flex-grow p-4">
               <Routes>
-
-                <Route path="/users" element={<Users />} />{' '}
-                <Route path="/roles" element={<Roles />} />{' '}
-                <Route path="/options" element={<Options />} />{' '}
-                <Route path="/options-by-roles" element={<OptionsByRoles />} />{' '}
-                <Route path="/basic-info" element={<BasicInfo />} />{' '}
-                <Route path="/human-resources" element={<HumanResources />} />{' '}
-                <Route path="/payroll" element={<Payroll />} />{' '}
-                <Route path="/tables/master-data" element={<MasterData />} />{' '}
-                <Route path="/tables/projects" element={<Projects />} />{' '}
-                <Route path="/evaluation/periodic" element={<Periodic />} />{' '}
-                <Route path="/evaluation/on-demand" element={<OnDemand />} />{' '}
-                <Route path="/reportes" element={<ReportGenerator />} />{' '}
-                <Route path="*" element={<Navigate to="/users" />} />{' '}
-              </Routes>{' '}
-            </div>{' '}
+                <Route path="/users" element={<Users />} />
+                <Route path="/roles" element={<Roles />} />
+                <Route path="/options" element={<Options />} />
+                <Route path="/options-by-roles" element={<OptionsByRoles />} />
+                <Route path="/basic-info" element={<BasicInfo />} />
+                <Route path="/human-resources" element={<HumanResources />} />
+                <Route path="/incidents" element={<Incidents />} />
+                <Route path="/payroll" element={<Payroll />} />
+                <Route path="/tables/master-data" element={<MasterData />} />
+                <Route path="/tables/projects" element={<Projects />} />
+                <Route path="/evaluation/periodic" element={<Periodic />} />
+                <Route path="/evaluation/on-demand" element={<OnDemand />} />
+                <Route path="/reports/contracts" element={<Contracts />} />
+                <Route path="/reports/general" element={<Reports />} />
+                <Route path="*" element={<Navigate to="/users" />} />
+              </Routes>
+            </div>
           </>
         ) : (
           <Routes>

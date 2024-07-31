@@ -9,7 +9,10 @@ const SistemaPensionario = () => {
   const [workers, setWorkers] = useState(initialWorkers);
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [searchDni, setSearchDni] = useState('');
+  const [searchPensionFund, setSearchPensionFund] = useState('');
+  const [searchAfp, setSearchAfp] = useState('');
 
   const handleEdit = (worker) => {
     setSelectedWorker(worker);
@@ -37,12 +40,27 @@ const SistemaPensionario = () => {
     setSelectedWorker(null);
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
+  const handleSearchNameChange = (e) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleSearchDniChange = (e) => {
+    setSearchDni(e.target.value);
+  };
+
+  const handleSearchPensionFundChange = (e) => {
+    setSearchPensionFund(e.target.value);
+  };
+
+  const handleSearchAfpChange = (e) => {
+    setSearchAfp(e.target.value);
   };
 
   const filteredWorkers = workers.filter(worker =>
-    worker.name.toLowerCase().includes(search.toLowerCase())
+    worker.name.toLowerCase().includes(searchName.toLowerCase()) &&
+    worker.dni.includes(searchDni) &&
+    worker.pensionFund.toLowerCase().includes(searchPensionFund.toLowerCase()) &&
+    worker.afp.toLowerCase().includes(searchAfp.toLowerCase())
   );
 
   return (
@@ -58,13 +76,36 @@ const SistemaPensionario = () => {
         >
           Añadir Opción
         </button>
-        <input
-          type="text"
-          placeholder="Buscar..."
-          className="border border-gray-300 rounded p-2 w-1/3"
-          value={search}
-          onChange={handleSearch}
-        />
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Buscar por Nombre..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchName}
+            onChange={handleSearchNameChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por DNI..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchDni}
+            onChange={handleSearchDniChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por Fondo de Pensión..."
+            className="border border-gray-300 rounded p-2 mr-2"
+            value={searchPensionFund}
+            onChange={handleSearchPensionFundChange}
+          />
+          <input
+            type="text"
+            placeholder="Buscar por AFP..."
+            className="border border-gray-300 rounded p-2"
+            value={searchAfp}
+            onChange={handleSearchAfpChange}
+          />
+        </div>
       </div>
       <table className="min-w-full bg-white">
         <thead>
