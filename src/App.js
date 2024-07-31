@@ -22,6 +22,13 @@ import OptionsByRoles from './components/OptionsByRoles';
 import Incidents from './components/Incidents';
 import Contracts from './components/reports/Contracts';
 import Reports from './components/reports/Reports';
+import DatosDerechohabiente from './components/DatosDerechohabiente';
+import DatosPersonales from './components/tabs/DatosPersonales';
+import Direccion from './components/tabs/Direccion';
+import SistemaPensionario from './components/tabs/SistemaPensionario';
+import DatosLaborales from './components/tabs/DatosLaborales';
+import DatosEducativos from './components/tabs/DatosEducativos';
+import TrabajoRemoto from './components/tabs/TrabajoRemoto';
 
 
 function App() {
@@ -33,7 +40,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex h-screen">
+      <div className="flex h-full">
         {isAuthenticated ? (
           <>
             <Sidebar />
@@ -44,7 +51,14 @@ function App() {
                 <Route path="/options" element={<Options />} />
                 <Route path="/options-by-roles" element={<OptionsByRoles />} />
                 <Route path="/basic-info" element={<BasicInfo />} />
+                <Route path="/tabs/DatosPersonales" element={<DatosPersonales />} />
+                <Route path="/tabs/Direccion" element={<Direccion />} />
+                <Route path="/tabs/SistemaPensionario" element={<SistemaPensionario />} />
+                <Route path="/tabs/DatosLaborales" element={<DatosLaborales />} />
+                <Route path="/tabs/DatosEducativos" element={<DatosEducativos />} />
+                <Route path="/tabs/TrabajoRemoto" element={<TrabajoRemoto />} />
                 <Route path="/human-resources" element={<HumanResources />} />
+                <Route path="/DatosDerechohabiente" element={<DatosDerechohabiente />} />
                 <Route path="/incidents" element={<Incidents />} />
                 <Route path="/payroll" element={<Payroll />} />
                 <Route path="/tables/master-data" element={<MasterData />} />

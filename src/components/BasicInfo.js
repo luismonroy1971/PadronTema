@@ -6,7 +6,6 @@ import DatosLaborales from './tabs/DatosLaborales';
 import DatosEducativos from './tabs/DatosEducativos';
 import TrabajoRemoto from './tabs/TrabajoRemoto';
 import Otros from './tabs/Otros';
-import DatosDerechohabiente from './tabs/DatosDerechohabiente';
 
 const workers = [
   {
@@ -68,7 +67,7 @@ const workers = [
 const BasicInfo = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentTab, setCurrentTab] = useState('personal');
-  const [workersData, setWorkers] = useState(workers);
+  const [workersData] = useState(workers);
   const workersPerPage = 10;
 
   const indexOfLastWorker = currentPage * workersPerPage;
@@ -91,8 +90,6 @@ const BasicInfo = () => {
         return <TrabajoRemoto workers={currentWorkers} />;
       case 'others':
         return <Otros workers={currentWorkers} />;
-      case 'dependents':
-        return <DatosDerechohabiente workers={currentWorkers} setWorkers={setWorkers} />;
       default:
         return null;
     }
