@@ -59,9 +59,6 @@ const Sidebar = () => {
             </ul>
           </div>
         </li>
-        <li className={`mb-2 ${isActive('/basic-info') ? 'text-activeOption' : ''}`}>
-          <Link to="/basic-info" className="hover:text-gray-400">Información Básica Trabajador</Link>
-        </li>
         <li className="mb-2">
           <div className="hover:text-gray-400 cursor-pointer">
             <Link to="#" className="hover:text-gray-400">Recursos Humanos</Link>
