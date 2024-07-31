@@ -54,8 +54,8 @@ const Sidebar = () => {
               <li className={`mb-2 ${isActive('/tabs/TrabajoRemoto') ? 'text-activeOption' : ''}`}>
               <Link to="/tabs/TrabajoRemoto" className="hover:text-gray-400">Trabajo Remoto</Link>
               </li>
-              <li className={`mb-2 ${isActive('/tabs/Otros') ? 'text-activeOption' : ''}`}>
-              <Link to="/tabs/Otros" className="hover:text-gray-400">Otros</Link>
+              <li className={`mb-2 ${isActive('/tabs/Hobbies') ? 'text-activeOption' : ''}`}>
+              <Link to="/tabs/Hobbies" className="hover:text-gray-400">Hobbies</Link>
               </li>
             </ul>
           </div>
