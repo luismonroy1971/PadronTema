@@ -105,45 +105,51 @@ const BasicInfo = () => {
       <div className="mb-4">
         <button
           onClick={() => setCurrentTab('personal')}
-          className={`mr-2 ${currentTab === 'personal' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'personal' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Datos Personales
         </button>
         <button
           onClick={() => setCurrentTab('address')}
-          className={`mr-2 ${currentTab === 'address' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'address' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Dirección
         </button>
         <button
           onClick={() => setCurrentTab('pension')}
-          className={`mr-2 ${currentTab === 'pension' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'pension' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Sistema Pensionario
         </button>
         <button
           onClick={() => setCurrentTab('work')}
-          className={`mr-2 ${currentTab === 'work' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'work' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Datos Laborales
         </button>
         <button
           onClick={() => setCurrentTab('education')}
-          className={`mr-2 ${currentTab === 'education' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'education' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Datos Educativos
         </button>
         <button
           onClick={() => setCurrentTab('remote')}
-          className={`mr-2 ${currentTab === 'remote' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'remote' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Trabajo Remoto
         </button>
         <button
           onClick={() => setCurrentTab('others')}
-          className={`mr-2 ${currentTab === 'others' ? 'active-tab' : ''}`}
+          className={`mr-2 ${currentTab === 'others' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
         >
           Otros
+        </button>
+        <button
+          onClick={() => setCurrentTab('dependents')}
+          className={`mr-2 ${currentTab === 'dependents' ? 'bg-blue-950 text-neutral-200' : ''} inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300  shadow-sm bg-white  text-gray-500  transition`}
+        >
+          Datos del Derechohabiente
         </button>
       </div>
       {renderTab()}

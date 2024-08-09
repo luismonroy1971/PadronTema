@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -9,7 +10,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar bg-gray-800 text-white h-screen p-4">
+    <div className="sidebar bg-gray-800 text-white h-full p-4 min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Admin Padrón General</h1>
       <ul>
         <li className={`mb-2 ${isActive('/users') ? 'text-activeOption' : ''}`}>
@@ -19,7 +20,7 @@ const Sidebar = () => {
           <Link to="/roles" className="hover:text-gray-400">Roles</Link>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Opciones</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/options') ? 'text-activeOption' : ''}`}>
@@ -32,7 +33,7 @@ const Sidebar = () => {
           </div>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Información Trabajador</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/tabs/DatosPersonales') ? 'text-activeOption' : ''}`}>
@@ -53,14 +54,14 @@ const Sidebar = () => {
               <li className={`mb-2 ${isActive('/tabs/TrabajoRemoto') ? 'text-activeOption' : ''}`}>
               <Link to="/tabs/TrabajoRemoto" className="hover:text-gray-400">Trabajo Remoto</Link>
               </li>
-              <li className={`mb-2 ${isActive('/tabs/Otros') ? 'text-activeOption' : ''}`}>
-              <Link to="/tabs/Otros" className="hover:text-gray-400">Otros</Link>
+              <li className={`mb-2 ${isActive('/tabs/Hobbies') ? 'text-activeOption' : ''}`}>
+              <Link to="/tabs/Hobbies" className="hover:text-gray-400">Hobbies</Link>
               </li>
             </ul>
           </div>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Recursos Humanos</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/human-resources') ? 'text-activeOption' : ''}`}>
@@ -79,7 +80,7 @@ const Sidebar = () => {
           <Link to="/payroll" className="hover:text-gray-400">Nóminas</Link>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Tablas</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/tables/master-data') ? 'text-activeOption' : ''}`}>
@@ -92,7 +93,7 @@ const Sidebar = () => {
           </div>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Evaluación</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/evaluation/periodic') ? 'text-activeOption' : ''}`}>
@@ -105,7 +106,7 @@ const Sidebar = () => {
           </div>
         </li>
         <li className="mb-2">
-          <div className="hover:text-gray-400 cursor-pointer">
+          <div className="">
             <Link to="#" className="hover:text-gray-400">Reportes</Link>
             <ul className="ml-4 mt-2">
               <li className={`mb-2 ${isActive('/reports/contracts') ? 'text-activeOption' : ''}`}>

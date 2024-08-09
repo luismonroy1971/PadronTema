@@ -17,6 +17,7 @@ import Projects from './components/tables/Projects';
 import Periodic from './components/evaluation/Periodic';
 import OnDemand from './components/evaluation/OnDemand';
 import LoginPage from './components/LoginPage';
+
 import OptionsByRoles from './components/OptionsByRoles';
 import Incidents from './components/Incidents';
 import Contracts from './components/reports/Contracts';
@@ -29,6 +30,7 @@ import DatosLaborales from './components/tabs/DatosLaborales';
 import DatosEducativos from './components/tabs/DatosEducativos';
 import TrabajoRemoto from './components/tabs/TrabajoRemoto';
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -38,7 +40,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex h-screen">
+      <div className="flex h-full">
         {isAuthenticated ? (
           <>
             <Sidebar />
